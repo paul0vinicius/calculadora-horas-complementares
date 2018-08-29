@@ -1,0 +1,30 @@
+{
+  "name": "calculadora-horas-complementares",
+  "version": "1.0.0",
+  "description": "Calculadora de horas complementares para a conclusão de curso na grade nova em CC - UFCG",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paul0vinicius/calculadora-horas-complementares.git"
+  },
+  "author": "Paulo Vinícius Soares",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/paul0vinicius/calculadora-horas-complementares/issues"
+  },
+  "homepage": "https://github.com/paul0vinicius/calculadora-horas-complementares#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "mongoose": "^5.2.10",
+    "morgan": "^1.9.0",
+    "swagger-express": "^1.0.5"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4",
+    "supertest": "^3.1.0"
+  }
+}
