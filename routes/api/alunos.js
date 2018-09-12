@@ -13,6 +13,14 @@ router.post("/", (req, res) => {
   Aluno.create(req.body).then(aluno => res.json(aluno));
 });
 
+// @route   GET api/alunos/
+// @desc    Pega lista de alunos cadastrados
+// @access  Public
+router.get("/", (req, res) => {
+  logger.info(req.body);
+  Aluno.findAll().then(alunos => res.json(alunos));
+});
+
 // @route   GET api/alunos/test
 // @desc    Testa a rota de alunos
 // @access  Public
