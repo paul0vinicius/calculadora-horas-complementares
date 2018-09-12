@@ -2,11 +2,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const logger = require("heroku-logger");
 
 // Importa rotas
 const usuarios = require("./routes/api/usuarios");
-const alunos = require("./routes/api/usuarios");
-const disciplinas = require("./routes/api/usuarios");
+const alunos = require("./routes/api/alunos");
+const disciplinas = require("./routes/api/disciplinas");
+const atividades = require("./routes/api/atividades");
 
 const app = express();
 
@@ -23,20 +25,17 @@ mongoose
     db,
     { useNewUrlParser: true }
   )
-  .then(() => console.log("Banco de dados conectado!"))
-  .catch(err => console.log(err));
+  .then(() => logger.info("Banco de dados conectado!"))
+  .catch(err => logger.info(err));
 
 // Chama rotas na aplicação
 app.use("/api/usuarios", usuarios);
 app.use("/api/alunos", alunos);
 app.use("/api/disciplinas", disciplinas);
+app.use("/api/atividades", atividades);
 
-const port = 3000;
+const port = 5000;
 
-app.get("/user", function(req, res) {
-  res.status(200).json({ name: "john" });
-});
-
-app.listen(port, () => console.log(`Servidor rodando em ${port}`));
+app.listen(port, () => logger.info(`Servidor rodando em ${port}`));
 
 module.exports = app;
