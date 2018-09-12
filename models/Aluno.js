@@ -1,19 +1,9 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-
-const AlunoSchema = new Schema({
-  usuario: {
-    type: Schema.Types.ObjectId,
-    ref: "usuarios"
-  },
-  nome: {
-    type: String,
-    required: true
-  },
-  periodo: {
-    type: Number,
-    required: true
-  }
-});
-
-module.exports = Aluno = mongoose.model("alunos", AlunoSchema);
+module.exports = (sequelize, type) => {
+  return sequelize.define("Aluno", {
+    matricula: {
+      type: type.STRING,
+      primaryKey: true,
+    },
+    nome: type.STRING,
+  });
+};

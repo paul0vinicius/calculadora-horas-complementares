@@ -1,19 +1,13 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-
-const DisciplinaSchema = new Schema({
-  nome: {
-    type: String,
-    required: true
-  },
-  tipo: {
-    type: String,
-    required: true
-  },
-  quantCreditos: {
-    type: Number,
-    required: true
-  }
-});
-
-module.exports = Disciplina = mongoose.model("disciplinas", DisciplinaSchema);
+module.exports = (sequelize, type) => {
+  return sequelize.define("Disciplina", {
+    codigo: {
+      type: type.STRING,
+      primaryKey: true,
+    },
+    creditos: type.INTEGER,
+    nome: type.STRING,
+    apelido: type.STRING,
+    descricao: type.STRING,
+    tipo: type.STRING
+  });
+};
