@@ -21,7 +21,7 @@ app.use("/api/alunos", alunos);
 app.use("/api/disciplinas", disciplinas);
 app.use("/api/atividades", atividades);
 
-const port = 5000 || process.env.PORT;
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => logger.info(`Servidor rodando em ${port}`));
 

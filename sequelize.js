@@ -13,8 +13,10 @@ const db = require("./config/keys").postgresURI;
 
 // Connect to Postgres
 const sequelize = new Sequelize(db, {
-  dialect: "postgres",
-  logging: logger.info
+  dialect: 'postgres',
+  dialectOptions: {
+    ssl: true
+  }
 });
 
 sequelize
@@ -28,17 +30,23 @@ sequelize
 
 const Usuario = UsuarioModel(sequelize, Sequelize);
 const Aluno = AlunoModel(sequelize, Sequelize);
-//const Disciplina = DisciplinaModel(sequelize, Sequelize);
-// const AtividadesComplementares = AtividadesComplementaresModel(
-//   sequelize,
-//   Sequelize
-// );
+const Disciplina = DisciplinaModel(sequelize, Sequelize);
+const AtividadeComplementar = AtividadeComplementarModel(
+  sequelize,
+  Sequelize
+);
 
-sequelize.sync({ force: true }).then(() => {
-  logger.info(`Database & tables created!`);
-});
+Usuario.belongsTo(Aluno);
+Aluno.hasMany(Disciplina, { as: "disciplinas" });
+Aluno.hasMany(AtividadeComplementar, { as: "atividadesComplementares" });
+
+// sequelize.sync({ force: true }).then(() => {
+//   logger.info(`Database & tables created!`);
+// });
 
 module.exports = {
   Usuario,
-  Aluno
+  Aluno,
+  Disciplina,
+  AtividadeComplementar
 };
