@@ -36,7 +36,7 @@ const AtividadeComplementar = AtividadeComplementarModel(
   Sequelize
 );
 
-Aluno.belongsTo(Usuario, { foreignKey: "UsuarioId" });
+Aluno.belongsTo(Usuario, { foreignKey: "UsuarioMatricula" });
 Aluno.hasMany(Disciplina, { foreignKey: "AlunoMatricula" });
 Aluno.hasMany(AtividadeComplementar, { foreignKey: "AlunoMatricula" });
 
