@@ -3,7 +3,7 @@ const logger = require("heroku-logger");
 
 const router = express.Router();
 
-const { cadastraOuAtualiza, verTodos, verAluno, apagaAluno } = require("../../controllers/alunos/alunosCRUDController");
+const { cadastraOuAtualizaAluno, verTodos, verAluno, apagaAluno } = require("../../controllers/alunos/alunosCRUDController");
 
 // @route   GET api/alunos/
 // @desc    Pega lista de alunos cadastrados
@@ -13,10 +13,10 @@ router.get("/", verTodos);
 // @route   POST api/alunos/
 // @desc    Cria um aluno ou atualiza seus dados pessoais
 // @access  Public
-router.post("/", cadastraOuAtualiza);
+router.post("/", cadastraOuAtualizaAluno);
 
 // @route   GET api/alunos/:matricula
-// @desc    Pega lista de alunos cadastrados
+// @desc    Pega aluno pela matrícula
 // @access  Public
 router.get("/:matricula", verAluno);
 

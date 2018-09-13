@@ -1,7 +1,7 @@
 const { Aluno } = require("../../sequelize");
 
 module.exports = {
-  cadastraOuAtualiza(req, res) {
+  cadastraOuAtualizaAluno(req, res) {
     Aluno.findOrCreate({ where: { matricula: req.body.matricula }, defaults: { nome: req.body.nome, UsuarioMatricula: req.body.matricula } }).spread((aluno, created) => {
       if (created) res.json(aluno);
       else {
