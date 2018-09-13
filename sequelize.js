@@ -36,13 +36,13 @@ const AtividadeComplementar = AtividadeComplementarModel(
   Sequelize
 );
 
-Usuario.belongsTo(Aluno);
-Aluno.hasMany(Disciplina, { as: "disciplinas" });
-Aluno.hasMany(AtividadeComplementar, { as: "atividadesComplementares" });
+Aluno.belongsTo(Usuario, { foreignKey: "UsuarioId" });
+Aluno.hasMany(Disciplina, { foreignKey: "AlunoMatricula" });
+Aluno.hasMany(AtividadeComplementar, { foreignKey: "AlunoMatricula" });
 
-// sequelize.sync({ force: true }).then(() => {
-//   logger.info(`Database & tables created!`);
-// });
+sequelize.sync({ force: true }).then(() => {
+  logger.info(`Database & tables created!`);
+});
 
 module.exports = {
   Usuario,
