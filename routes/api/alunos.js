@@ -3,15 +3,27 @@ const logger = require("heroku-logger");
 
 const router = express.Router();
 
-const { Aluno } = require("../../sequelize");
+const { create } = require("../../controllers/alunos/alunosCRUDController");
 
 // @route   POST api/alunos/
 // @desc    Cria um aluno
 // @access  Public
-router.post("/", (req, res) => {
-  logger.info(req.body);
-  Aluno.create(req.body).then(aluno => res.json(aluno));
-});
+// router.post("/", (req, res) => {
+//   logger.info(req.body);
+//   Aluno.create(req.body);
+
+//   const disciplina = req.body.disciplinas[0];
+
+//   Disciplina.create(disciplina).then(disciplina => {
+//     disciplina.AlunoMatricula = req.body.matricula;
+//     disciplina.save();
+//   });
+// });
+
+// @route   POST api/alunos/
+// @desc    Cria um aluno
+// @access  Public
+router.post("/", create);
 
 // @route   GET api/alunos/
 // @desc    Pega lista de alunos cadastrados
