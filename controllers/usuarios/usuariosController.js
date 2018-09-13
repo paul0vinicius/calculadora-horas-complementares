@@ -4,8 +4,6 @@ module.exports = {
   cadastra(req, res) {
     Usuario.create({ "matricula": req.body.matricula, "senha": req.body.senha, "email": req.body.email }).then(usuario => res.json(usuario));
   },
-  getAll() { },
-  getById() { },
-  update() { },
-  deleteById() { }
+  login(req, res) { },
+  getUsuarioAtual(req, res) { },
 };

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { cadastra } = require("../../controllers/usuarios/usuariosCRUDController");
+const { cadastra, login, getUsuarioAtual } = require("../../controllers/usuarios/usuariosController");
 
 // @route   GET api/usuarios/test
 // @desc    Testa a rota de usuários
@@ -18,11 +18,11 @@ router.post("/cadastro", cadastra);
 // @route   GET api/usuarios/login
 // @desc    Loga um usuário
 // @access  Public
-router.post("/login", (req, res) => { });
+router.post("/login", login);
 
 // @route   GET api/usuarios/current
 // @desc    Pega o usuário atual
 // @access  Public
-router.post("/current", (req, res) => { });
+router.post("/eu", getUsuarioAtual);
 
 module.exports = router;
