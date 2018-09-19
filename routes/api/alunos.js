@@ -1,3 +1,9 @@
+/**
+ * @swagger
+ * resourcePath: /api/alunos
+ * description: All about API
+ */
+
 const express = require("express");
 const logger = require("heroku-logger");
 
@@ -16,6 +22,16 @@ router.post("/", (req, res) => {
 // @route   GET api/alunos/
 // @desc    Pega lista de alunos cadastrados
 // @access  Public
+/**
+ * @swagger
+ * path: api/alunos/
+ * operations:
+ *   -  httpMethod: GET
+ *      summary: Pega lista de alunos cadastrados
+ *      notes: Retorna a lista de todos os alunos cadastrados
+ *      responseClass: Aluno
+ *      nickname: getAlunos
+ */
 router.get("/", (req, res) => {
   logger.info(req.body);
   Aluno.findAll().then(alunos => res.json(alunos));
