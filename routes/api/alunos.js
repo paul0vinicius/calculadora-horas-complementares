@@ -4,25 +4,15 @@
  * description: Especificação das rotas referentes a alunos
  */
 const express = require("express");
-const logger = require("heroku-logger");
 
 const router = express.Router();
 
-const { Aluno } = require("../../sequelize");
-
-/**
- * @swagger
- * path: api/alunos/
- * operations:
- *   -  httpMethod: POST
- *      summary: Cria um aluno
- *      responseClass: Aluno
- *      nickname: criaAlunos
- */
-router.post("/", (req, res) => {
-  logger.info(req.body);
-  Aluno.create(req.body).then(aluno => res.json(aluno));
-});
+const {
+  cadastraOuAtualizaAluno,
+  verTodos,
+  verAluno,
+  apagaAluno
+} = require("../../controllers/alunos/alunosCRUDController");
 
 /**
  * @swagger
@@ -34,16 +24,39 @@ router.post("/", (req, res) => {
  *      responseClass: Aluno
  *      nickname: getAlunos
  */
-router.get("/", (req, res) => {
-  logger.info(req.body);
-  Aluno.findAll().then(alunos => res.json(alunos));
-});
+router.get("/", verTodos);
 
-// @route   GET api/alunos/test
-// @desc    Testa a rota de alunos
-// @access  Public
-router.get("/test", (req, res) =>
-  res.json({ msg: "Testando a rota de alunos." })
-);
+/**
+ * @swagger
+ * path: api/alunos/
+ * operations:
+ *   -  httpMethod: POST
+ *      summary: Cria um aluno
+ *      responseClass: Aluno
+ *      nickname: criaAlunos
+ */
+router.post("/", cadastraOuAtualizaAluno);
+
+/**
+ * @swagger
+ * path: api/alunos/:matricula
+ * operations:
+ *   -  httpMethod: GET
+ *      summary: Pega aluno pela matrícula
+ *      responseClass: Aluno
+ *      nickname: getAluno
+ */
+router.get("/:matricula", verAluno);
+
+/**
+ * @swagger
+ * path: api/alunos/:matricula
+ * operations:
+ *   -  httpMethod: DELETE
+ *      summary: Deleta aluno pela matrícula
+ *      responseClass: Aluno
+ *      nickname: deletaAluno
+ */
+router.delete("/:matricula", apagaAluno);
 
 module.exports = router;

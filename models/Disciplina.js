@@ -8,6 +8,9 @@ module.exports = (sequelize, type) => {
     nome: type.STRING,
     apelido: type.STRING,
     descricao: type.STRING,
-    tipo: type.STRING
+    tipo: {
+      type: type.ENUM,
+      values: ['Optativa', "Complementar"]
+    },
   });
 };
