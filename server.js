@@ -25,7 +25,12 @@ app.use(
     swaggerURL: "/docs/api",
     swaggerJSON: "/api-docs.json",
     swaggerUI: "./docs-ui/swagger/",
-    apis: ["./routes/api/alunos.js"]
+    apis: [
+      "./routes/api/alunos.js",
+      "./routes/api/atividades.js",
+      "./routes/api/disciplinas.js",
+      "./routes/api/usuarios.js"
+    ]
   })
 );
 
