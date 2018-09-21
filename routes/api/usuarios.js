@@ -6,18 +6,11 @@
 const express = require("express");
 const router = express.Router();
 
-/**
- * @swagger
- * path: api/usuarios/test
- * operations:
- *   -  httpMethod: GET
- *      summary: Testa a rota de usuários
- *      responseClass: Usuario
- *      nickname: test
- */
-router.get("/test", (req, res) =>
-  res.json({ msg: "Testando a rota de usuários." })
-);
+const {
+  cadastra,
+  login,
+  getUsuarioAtual
+} = require("../../controllers/usuarios/usuariosController");
 
 /**
  * @swagger
@@ -28,7 +21,7 @@ router.get("/test", (req, res) =>
  *      responseClass: Usuario
  *      nickname: cadastraUsuario
  */
-router.post("/", (req, res) => {});
+router.post("/", cadastra);
 
 /**
  * @swagger
@@ -39,7 +32,7 @@ router.post("/", (req, res) => {});
  *      responseClass: Usuario
  *      nickname: loginUsuario
  */
-router.post("/login", (req, res) => {});
+router.post("/login", login);
 
 /**
  * @swagger
@@ -50,6 +43,6 @@ router.post("/login", (req, res) => {});
  *      responseClass: Usuario
  *      nickname: getUsuarioAtual
  */
-router.get("/current", (req, res) => {});
+router.get("/eu", getUsuarioAtual);
 
 module.exports = router;
