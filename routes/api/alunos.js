@@ -1,28 +1,62 @@
+/**
+ * @swagger
+ * resourcePath: /api/alunos
+ * description: Especificação das rotas referentes a alunos
+ */
 const express = require("express");
-const logger = require("heroku-logger");
 
 const router = express.Router();
 
-const { cadastraOuAtualizaAluno, verTodos, verAluno, apagaAluno } = require("../../controllers/alunos/alunosCRUDController");
+const {
+  cadastraOuAtualizaAluno,
+  verTodos,
+  verAluno,
+  apagaAluno
+} = require("../../controllers/alunos/alunosCRUDController");
 
-// @route   GET api/alunos/
-// @desc    Pega lista de alunos cadastrados
-// @access  Public
+/**
+ * @swagger
+ * path: api/alunos/
+ * operations:
+ *   -  httpMethod: GET
+ *      summary: Pega lista de alunos cadastrados
+ *      notes: Retorna a lista de todos os alunos cadastrados
+ *      responseClass: Aluno
+ *      nickname: getAlunos
+ */
 router.get("/", verTodos);
 
-// @route   POST api/alunos/
-// @desc    Cria um aluno ou atualiza seus dados pessoais
-// @access  Public
+/**
+ * @swagger
+ * path: api/alunos/
+ * operations:
+ *   -  httpMethod: POST
+ *      summary: Cria um aluno
+ *      responseClass: Aluno
+ *      nickname: criaAlunos
+ */
 router.post("/", cadastraOuAtualizaAluno);
 
-// @route   GET api/alunos/:matricula
-// @desc    Pega aluno pela matrícula
-// @access  Public
+/**
+ * @swagger
+ * path: api/alunos/:matricula
+ * operations:
+ *   -  httpMethod: GET
+ *      summary: Pega aluno pela matrícula
+ *      responseClass: Aluno
+ *      nickname: getAluno
+ */
 router.get("/:matricula", verAluno);
 
-// @route   DELETE api/alunos/:matricula
-// @desc    Apaga um aluno
-// @access  Public
+/**
+ * @swagger
+ * path: api/alunos/:matricula
+ * operations:
+ *   -  httpMethod: DELETE
+ *      summary: Deleta aluno pela matrícula
+ *      responseClass: Aluno
+ *      nickname: deletaAluno
+ */
 router.delete("/:matricula", apagaAluno);
 
 module.exports = router;

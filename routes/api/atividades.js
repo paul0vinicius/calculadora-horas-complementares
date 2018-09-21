@@ -1,26 +1,61 @@
+/**
+ * @swagger
+ * resourcePath: /api/atividades
+ * description: Especificação das rotas referentes às atividades complementares
+ */
 const express = require("express");
 const router = express.Router();
 
-const { cadastraOuAtualizaAtividade, verTodas, verAtividade, apagaAtividade } = require("../../controllers/atividades/atividadesCRUDController");
+const {
+  cadastraOuAtualizaAtividade,
+  verTodas,
+  verAtividade,
+  apagaAtividade
+} = require("../../controllers/atividades/atividadesCRUDController");
 
-// @route   GET api/disciplinas/
-// @desc    Pega lista de disciplinas cadastradas
-// @access  Public
+/**
+ * @swagger
+ * path: api/atividades/
+ * operations:
+ *   -  httpMethod: GET
+ *      summary: Pega lista de atividades cadastradas
+ *      notes: Retorna a lista de todas as atividades cadastradas
+ *      responseClass: AtividadeComplementar
+ *      nickname: getAtividades
+ */
 router.get("/", verTodas);
 
-// @route   POST api/disciplinas/
-// @desc    Cria um disciplina ou atualiza seus dados
-// @access  Public
+/**
+ * @swagger
+ * path: api/atividades/
+ * operations:
+ *   -  httpMethod: POST
+ *      summary: Cria uma atividade ou atualiza seus dados
+ *      responseClass: AtividadeComplementar
+ *      nickname: criaAtividades
+ */
 router.post("/", cadastraOuAtualizaAtividade);
 
-// @route   GET api/disciplinas/:codigo
-// @desc    Pega disciplina pelo seu código
-// @access  Public
+/**
+ * @swagger
+ * path: api/atividades/:codigo
+ * operations:
+ *   -  httpMethod: GET
+ *      summary: Pega atividade pelo seu código
+ *      responseClass: AtividadeComplementar
+ *      nickname: getAtividade
+ */
 router.get("/:id", verAtividade);
 
-// @route   DELETE api/disciplinas/:codigo
-// @desc    Apaga uma disciplina
-// @access  Public
-router.delete("/:matricula", apagaAtividade);
+/**
+ * @swagger
+ * path: api/atividades/:codigo
+ * operations:
+ *   -  httpMethod: DELETE
+ *      summary: Deleta atividade pelo seu código
+ *      responseClass: AtividadeComplementar
+ *      nickname: deletaAtividade
+ */
+router.delete("/:codigo", apagaAtividade);
 
 module.exports = router;

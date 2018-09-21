@@ -2,6 +2,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const logger = require("heroku-logger");
+const swagger = require("swagger-express");
 
 // Importa rotas
 const usuarios = require("./routes/api/usuarios");
@@ -15,13 +16,31 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// API documentation UI
+app.use(
+  swagger.init(app, {
+    apiVersion: "1.0",
+    swaggerVersion: "1.0",
+    basePath: "http://localhost:3000",
+    swaggerURL: "/docs/api",
+    swaggerJSON: "/api-docs.json",
+    swaggerUI: "./docs-ui/swagger/",
+    apis: [
+      "./routes/api/alunos.js",
+      "./routes/api/atividades.js",
+      "./routes/api/disciplinas.js",
+      "./routes/api/usuarios.js"
+    ]
+  })
+);
+
 // Chama rotas na aplicação
 app.use("/api/usuarios", usuarios);
 app.use("/api/alunos", alunos);
 app.use("/api/disciplinas", disciplinas);
 app.use("/api/atividades", atividades);
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => logger.info(`Servidor rodando em ${port}`));
 

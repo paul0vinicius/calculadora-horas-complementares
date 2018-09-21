@@ -1,26 +1,60 @@
+/**
+ * @swagger
+ * resourcePath: /api/disciplinas
+ * description: Especificação das rotas referentes às disciplinas
+ */
 const express = require("express");
 const router = express.Router();
 
-const { cadastraOuAtualizaDisciplina, verTodas, verDisciplina, apagaDisciplina } = require("../../controllers/disciplinas/disciplinasCRUDController");
+const {
+  cadastraOuAtualizaDisciplina,
+  verTodas,
+  verDisciplina,
+  apagaDisciplina
+} = require("../../controllers/disciplinas/disciplinasCRUDController");
 
-// @route   GET api/disciplinas/
-// @desc    Pega lista de disciplinas cadastradas
-// @access  Public
+/**
+ * @swagger
+ * path: api/disciplinas/
+ * operations:
+ *   -  httpMethod: GET
+ *      summary: Pega lista de disciplinas cadastradas
+ *      responseClass: Disciplina
+ *      nickname: getDisciplinas
+ */
 router.get("/", verTodas);
 
-// @route   POST api/disciplinas/
-// @desc    Cria um disciplina ou atualiza seus dados
-// @access  Public
+/**
+ * @swagger
+ * path: api/disciplinas/
+ * operations:
+ *   -  httpMethod: POST
+ *      summary: Cria um disciplina ou atualiza seus dados
+ *      responseClass: Disciplina
+ *      nickname: criaDisciplinas
+ */
 router.post("/", cadastraOuAtualizaDisciplina);
 
-// @route   GET api/disciplinas/:codigo
-// @desc    Pega disciplina pelo seu código
-// @access  Public
+/**
+ * @swagger
+ * path: api/disciplinas/:codigo
+ * operations:
+ *   -  httpMethod: GET
+ *      summary: Pega disciplina pelo seu código
+ *      responseClass: Disciplina
+ *      nickname: getDisciplina
+ */
 router.get("/:codigo", verDisciplina);
 
-// @route   DELETE api/disciplinas/:codigo
-// @desc    Apaga uma disciplina
-// @access  Public
-router.delete("/:matricula", apagaDisciplina);
+/**
+ * @swagger
+ * path: api/disciplinas/:codigo
+ * operations:
+ *   -  httpMethod: DELETE
+ *      summary: Apaga disciplina de um aluno dado seu código
+ *      responseClass: Disciplina
+ *      nickname: deletaDisciplina
+ */
+router.delete("/:codigo", apagaDisciplina);
 
 module.exports = router;
