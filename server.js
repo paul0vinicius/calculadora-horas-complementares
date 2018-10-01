@@ -16,6 +16,18 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// DB Config
+const db = require("./config/keys").mongoURI;
+
+// Connect to MongoDB
+mongoose
+  .connect(
+    db,
+    { useNewUrlParser: true }
+  )
+  .then(() => console.log("Banco de dados conectado!"))
+  .catch(err => console.log(err));
+
 // API documentation UI
 app.use(
   swagger.init(app, {
