@@ -5,6 +5,7 @@
  */
 const express = require("express");
 const router = express.Router();
+const passport = require("passport");
 
 const {
   cadastra,
@@ -36,13 +37,17 @@ router.post("/login", login);
 
 /**
  * @swagger
- * path: api/usuarios/current
+ * path: api/usuarios/eu
  * operations:
  *   -  httpMethod: GET
  *      summary: Pega o usuário atual
  *      responseClass: Usuario
  *      nickname: getUsuarioAtual
  */
-router.get("/eu", getUsuarioAtual);
+router.get(
+  "/eu",
+  passport.authenticate("jwt", { session: false }),
+  getUsuarioAtual
+);
 
 module.exports = router;

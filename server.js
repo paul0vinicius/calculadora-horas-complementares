@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const logger = require("heroku-logger");
 const swagger = require("swagger-express");
 const mongoose = require("mongoose");
+const passport = require("passport");
 
 // Importa rotas
 const usuarios = require("./routes/api/usuarios");
@@ -28,6 +29,12 @@ mongoose
   )
   .then(() => logger.info("Banco de dados conectado!"))
   .catch(err => logger.error(err));
+
+// Passport middleware
+app.use(passport.initialize());
+
+// Passport Config
+require("./config/passport")(passport);
 
 // API documentation UI
 app.use(
