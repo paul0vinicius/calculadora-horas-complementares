@@ -10,6 +10,10 @@ const UsuarioSchema = new Schema({
     type: String,
     required: true
   },
+  matricula: {
+    type: String,
+    required: true
+  },
   senha: {
     type: String,
     required: true

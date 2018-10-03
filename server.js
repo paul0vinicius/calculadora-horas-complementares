@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const logger = require("heroku-logger");
 const swagger = require("swagger-express");
+const mongoose = require("mongoose");
 
 // Importa rotas
 const usuarios = require("./routes/api/usuarios");
@@ -17,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // DB Config
-const db = require("./config/keys").mongoURI;
+const db = require("./config/keys").MONGODB_URI;
 
 // Connect to MongoDB
 mongoose
@@ -25,8 +26,8 @@ mongoose
     db,
     { useNewUrlParser: true }
   )
-  .then(() => console.log("Banco de dados conectado!"))
-  .catch(err => console.log(err));
+  .then(() => logger.info("Banco de dados conectado!"))
+  .catch(err => logger.error(err));
 
 // API documentation UI
 app.use(
