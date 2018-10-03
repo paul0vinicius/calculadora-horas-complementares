@@ -22,8 +22,7 @@ const AlunoSchema = new Schema({
     type: String
   },
   periodo: {
-    type: Number,
-    required
+    type: Number
   }
 });
 
