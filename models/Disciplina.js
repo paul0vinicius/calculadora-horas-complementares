@@ -1,16 +1,29 @@
-module.exports = (sequelize, type) => {
-  return sequelize.define("Disciplina", {
-    codigo: {
-      type: type.STRING,
-      primaryKey: true,
-    },
-    creditos: type.INTEGER,
-    nome: type.STRING,
-    apelido: type.STRING,
-    descricao: type.STRING,
-    tipo: {
-      type: type.ENUM,
-      values: ['Optativa', "Complementar"]
-    },
-  });
-};
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+
+const DisciplinaSchema = new Schema({
+  codigo: {
+    type: String,
+    required: true
+  },
+  creditos: {
+    type: Number,
+    required: true
+  },
+  nome: {
+    type: String,
+    required: true
+  },
+  apelido: {
+    type: String
+  },
+  descricao: {
+    type: String
+  },
+  tipo: {
+    type: String,
+    required: true
+  }
+});
+
+module.exports = Disciplina = mongoose.model("disciplinas", DisciplinaSchema);

@@ -1,16 +1,8 @@
-const { Disciplina } = require("../../sequelize");
+const Disciplina = require("../../models/Disciplina");
 
 module.exports = {
-  cadastraOuAtualizaDisciplina(req, res) {
-
-  },
-  verTodas(req, res) {
-    Disciplina.findAll().then(disciplinas => res.json(disciplinas));
-  },
-  verDisciplina(req, res) {
-    Disciplina.findById(req.params.codigo).then(disciplina => res.json(disciplina));
-  },
-  apagaDisciplina(req, res) {
-
-  }
+  cadastraOuAtualizaDisciplina(req, res) {},
+  verTodas(req, res) {},
+  verDisciplina(req, res) {},
+  apagaDisciplina(req, res) {}
 };
