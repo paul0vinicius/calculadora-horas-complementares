@@ -4,7 +4,7 @@
  * description: Especificação das rotas referentes a alunos
  */
 const express = require("express");
-
+const passport = require("passport");
 const router = express.Router();
 
 const {
@@ -35,7 +35,11 @@ router.get("/", verTodos);
  *      responseClass: Aluno
  *      nickname: criaAlunos
  */
-router.post("/", cadastraOuAtualizaAluno);
+router.post(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  cadastraOuAtualizaAluno
+);
 
 /**
  * @swagger
