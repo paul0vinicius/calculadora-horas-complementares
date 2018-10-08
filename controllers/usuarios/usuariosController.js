@@ -52,10 +52,6 @@ module.exports = {
     const matricula = req.body.matricula;
     const senha = req.body.senha;
 
-    console.log(email);
-    console.log(matricula);
-    console.log(senha);
-
     Usuario.findOne({ $or: [{ email: email }, { matricula: matricula }] })
       .then(usuario => {
         if (!usuario) {
