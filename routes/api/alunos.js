@@ -11,8 +11,10 @@ const {
   cadastraOuAtualizaAluno,
   verTodos,
   verAluno,
-  apagaAluno
-} = require("../../controllers/alunos/alunosCRUDController");
+  apagaAluno,
+  adicionaAtividades,
+  adicionaDisciplinas
+} = require("../../controllers/alunos/alunosController");
 
 /**
  * @swagger
@@ -43,6 +45,36 @@ router.post(
 
 /**
  * @swagger
+ * path: api/alunos/disciplinas
+ * operations:
+ *   -  httpMethod: POST
+ *      summary: Adiciona disciplinas a um aluno
+ *      responseClass: Aluno
+ *      nickname: adicionaDisciplinas
+ */
+router.post(
+  "/disciplinas",
+  passport.authenticate("jwt", { session: false }),
+  adicionaDisciplinas
+);
+
+/**
+ * @swagger
+ * path: api/alunos/atividades
+ * operations:
+ *   -  httpMethod: POST
+ *      summary: Adiciona atividades a um aluno
+ *      responseClass: Aluno
+ *      nickname: adicionaAtividades
+ */
+router.post(
+  "/atividades",
+  passport.authenticate("jwt", { session: false }),
+  adicionaAtividades
+);
+
+/**
+ * @swagger
  * path: api/alunos/:matricula
  * operations:
  *   -  httpMethod: GET
@@ -57,10 +89,14 @@ router.get("/:matricula", verAluno);
  * path: api/alunos/:matricula
  * operations:
  *   -  httpMethod: DELETE
- *      summary: Deleta aluno pela matrícula
+ *      summary: Deleta aluno
  *      responseClass: Aluno
  *      nickname: deletaAluno
  */
-router.delete("/:matricula", apagaAluno);
+router.delete(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  apagaAluno
+);
 
 module.exports = router;
