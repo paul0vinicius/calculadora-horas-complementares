@@ -4,22 +4,22 @@ const app = require("../server");
 /**
  * Teste de cadastro
  */
-describe('POST /api/usuarios', function () {
+describe("POST /api/usuarios", function() {
   let data = {
-    "nome": "Paulo Soares",
-    "email": "paulo.soares@ccc.ufcg.edu.br",
-    "matricula": "114110999",
-    "senha": "shakepaulinha"
-  }
-  it('respond with 200 OK', function (done) {
-    this.timeout(3000);
+    nome: "Paulo Soares",
+    email: "paulo.soares@ccc.ufcg.edu.br",
+    matricula: "114110999",
+    senha: "shakepaulinha"
+  };
+  it("respond with 200 OK", function(done) {
+    this.timeout(10000);
     request(app)
-      .post('/api/usuarios')
+      .post("/api/usuarios")
       .send(data)
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
+      .set("Accept", "application/json")
+      .expect("Content-Type", /json/)
       .expect(200)
-      .end((err) => {
+      .end(err => {
         if (err) return done(err);
         done();
       });
@@ -29,21 +29,21 @@ describe('POST /api/usuarios', function () {
 /**
  * Teste de login
  */
-describe('POST /api/usuarios/login', function () {
+describe("POST /api/usuarios/login", function() {
   let data = {
-    "email": "paulo.soares@ccc.ufcg.edu.br",
-    "matricula": "114110999",
-    "senha": "shakepaulinha"
-  }
-  it('respond with 200 OK', function (done) {
+    email: "paulo.soares@ccc.ufcg.edu.br",
+    matricula: "114110999",
+    senha: "shakepaulinha"
+  };
+  it("respond with 200 OK", function(done) {
     this.timeout(3000);
     request(app)
-      .post('/api/usuarios/login')
+      .post("/api/usuarios/login")
       .send(data)
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
+      .set("Accept", "application/json")
+      .expect("Content-Type", /json/)
       .expect(200)
-      .end((err) => {
+      .end(err => {
         if (err) return done(err);
         done();
       });
