@@ -4,6 +4,7 @@
  * description: Especificação das rotas referentes às atividades complementares
  */
 const express = require("express");
+const passport = require("passport");
 const router = express.Router();
 
 const {
@@ -34,7 +35,11 @@ router.get("/", verTodas);
  *      responseClass: AtividadeComplementar
  *      nickname: criaAtividades
  */
-router.post("/", cadastraOuAtualizaAtividade);
+router.post(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  cadastraOuAtualizaAtividade
+);
 
 /**
  * @swagger
