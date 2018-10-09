@@ -24,6 +24,11 @@ const UsuarioSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
+  },
+  role: {
+    type: String,
+    enum: ["admin", "user"],
+    default: "user"
   }
 });
 

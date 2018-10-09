@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const AtividadeComplementarSchema = new Schema({
-  id: {
+  codigo: {
     type: Number,
     required: true
   },

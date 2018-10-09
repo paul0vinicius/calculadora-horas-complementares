@@ -23,7 +23,19 @@ const AlunoSchema = new Schema({
   },
   periodo: {
     type: Number
-  }
+  },
+  disciplinas: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "disciplinas"
+    }
+  ],
+  atividades: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "atividadesComplementares"
+    }
+  ]
 });
 
 module.exports = Aluno = mongoose.model("alunos", AlunoSchema);
