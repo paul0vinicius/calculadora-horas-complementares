@@ -70,7 +70,8 @@ module.exports = {
               id: usuario.id,
               nome: usuario.nome,
               avatar: usuario.avatar,
-              matricula: usuario.matricula
+              matricula: usuario.matricula,
+              role: usuario.role
             }; // Create JWT Payload
 
             // Sign Token
@@ -101,7 +102,8 @@ module.exports = {
       id: req.user.id,
       nome: req.user.nome,
       email: req.user.email,
-      matricula: req.user.matricula
+      matricula: req.user.matricula,
+      role: req.user.role
     });
   }
 };
