@@ -50,7 +50,7 @@ router.post(
  *      responseClass: AtividadeComplementar
  *      nickname: getAtividade
  */
-router.get("/:id", verAtividade);
+router.get("/:codigo", verAtividade);
 
 /**
  * @swagger

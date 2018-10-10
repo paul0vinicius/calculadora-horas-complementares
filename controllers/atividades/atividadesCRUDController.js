@@ -48,7 +48,29 @@ module.exports = {
       })
       .catch(err => console.log(err));
   },
-  verTodas(req, res) {},
-  verAtividade(req, res) {},
+
+  verTodas(req, res) {
+    AtividadeComplementar.find()
+      .then(atividades => {
+        if (!atividades) {
+          res
+            .status(NOT_FOUND)
+            .json({ "errors.noprofile": "There are no atividades" });
+        }
+        res.json(atividades);
+      })
+      .catch(err =>
+        res.status(NOT_FOUND).json({ err, profile: "There are no atividades" })
+      );
+  },
+
+  verAtividade(req, res) {
+    AtividadeComplementar.findOne({ codigo: req.params.codigo }).then(
+      atividade => {
+        res.json(atividade);
+      }
+    );
+  },
+
   apagaAtividade(req, res) {}
 };
