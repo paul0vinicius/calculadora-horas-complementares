@@ -45,6 +45,7 @@ module.exports = {
       }
     });
   },
+
   verTodos(req, res) {
     Aluno.find()
       .populate("usuario", ["nome", "avatar"])
@@ -60,6 +61,7 @@ module.exports = {
         res.status(NOT_FOUND).json({ err, profile: "There are no alunos" })
       );
   },
+
   verAluno(req, res) {
     Aluno.findOne({ apelido: req.params.apelido })
       .populate("usuario", ["nome", "avatar"])
@@ -73,6 +75,7 @@ module.exports = {
       })
       .catch(err => res.status(404).json(err));
   },
+
   adicionaDisciplinas(req, res) {
     Aluno.findOne({ usuario: req.user.id })
       .then(aluno => {
@@ -88,6 +91,7 @@ module.exports = {
         res.status(404).json(err);
       });
   },
+
   adicionaAtividades(req, res) {
     Aluno.findOne({ usuario: req.user.id })
       .then(aluno => {
@@ -103,11 +107,50 @@ module.exports = {
         res.status(404).json(err);
       });
   },
+
   apagaAluno(req, res) {
     Aluno.findOneAndRemove({ usuario: req.user.id }).then(() => {
       Usuario.findOneAndRemove({ _id: req.user.id }).then(() => {
         res.json({ success: true });
       });
+    });
+  },
+
+  apagaDisciplina(req, res) {
+    Aluno.findOne({ usuario: req.user.id }).then(aluno => {
+      console.log(aluno);
+      // Get remove index
+      const removeIndex = aluno.disciplinas
+        .map(item => item.id)
+        .indexOf(req.params.dsc_id);
+
+      // Remove from array
+      aluno.disciplinas.splice(removeIndex, 1);
+
+      // Save
+      aluno
+        .save()
+        .then(aluno => res.json(aluno))
+        .catch(err => res.status(NOT_FOUND).json(err));
+    });
+  },
+
+  apagaAtividade(req, res) {
+    Aluno.findOne({ usuario: req.user.id }).then(aluno => {
+      console.log(aluno);
+      // Get remove index
+      const removeIndex = aluno.atividades
+        .map(item => item.id)
+        .indexOf(req.params.atv_id);
+
+      // Remove from array
+      aluno.atividades.splice(removeIndex, 1);
+
+      // Save
+      aluno
+        .save()
+        .then(aluno => res.json(aluno))
+        .catch(err => res.status(NOT_FOUND).json(err));
     });
   }
 };

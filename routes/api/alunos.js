@@ -13,7 +13,9 @@ const {
   verAluno,
   apagaAluno,
   adicionaAtividades,
-  adicionaDisciplinas
+  adicionaDisciplinas,
+  apagaAtividade,
+  apagaDisciplina
 } = require("../../controllers/alunos/alunosController");
 
 /**
@@ -97,6 +99,18 @@ router.delete(
   "/",
   passport.authenticate("jwt", { session: false }),
   apagaAluno
+);
+
+router.delete(
+  "/atividades/:atv_id",
+  passport.authenticate("jwt", { session: false }),
+  apagaAtividade
+);
+
+router.delete(
+  "/disciplinas/:dsc_id",
+  passport.authenticate("jwt", { session: false }),
+  apagaDisciplina
 );
 
 module.exports = router;
